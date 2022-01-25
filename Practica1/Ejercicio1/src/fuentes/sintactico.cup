@@ -1,0 +1,47 @@
+package fuentes;
+
+import java_cup.runtime.Symbol;
+
+//PARSER PARA EL ARCHIVO DE ESCENARIOS
+parser code
+{://Codigo visible
+    
+    public void syntax_error(Symbol s){
+        System.err.println("ERROR R: ");
+        System.err.println(s);
+    }
+
+    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{ 
+        System.err.println("ERROR N_R: ");
+        System.err.println(s);
+    }
+
+    
+
+:}
+
+action code
+{://Codigo de acciones
+    
+    String primerPalabra = "";
+    
+    public void write(String out) {
+        System.out.print(out);
+    }
+:}
+
+terminal String COMA,PALABRA;
+nonterminal Integer L;
+nonterminal S;
+
+
+start with S;
+
+S::=
+    L           {: write(primerPalabra); :};
+ 
+
+L ::= 
+   L COMA PALABRA:palabra   {: write(palabra+","); :}
+ | PALABRA:palabra          {: primerPalabra = palabra; :}
+;
