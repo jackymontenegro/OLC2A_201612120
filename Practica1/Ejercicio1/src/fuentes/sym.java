@@ -8,7 +8,9 @@ package fuentes;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
+  public static final int UNO = 5;
   public static final int COMA = 2;
+  public static final int CERO = 4;
   public static final int PALABRA = 3;
   public static final int error = 1;
   public static final int EOF = 0;
@@ -16,7 +18,9 @@ public class sym {
   "EOF",
   "error",
   "COMA",
-  "PALABRA"
+  "PALABRA",
+  "CERO",
+  "UNO"
   };
 }
 

@@ -24,24 +24,36 @@ action code
 {://Codigo de acciones
     
     String primerPalabra = "";
-    
+    int ceros = 0;
+    int unos = 0;
+
     public void write(String out) {
         System.out.print(out);
     }
 :}
 
-terminal String COMA,PALABRA;
-nonterminal Integer L;
-nonterminal S;
+terminal String COMA,PALABRA,CERO, UNO;
+nonterminal S,L,N,Np;
 
 
 start with S;
 
 S::=
-    L           {: write(primerPalabra); :};
- 
+    L           {: System.out.println(primerPalabra); :}
+ | N            {: System.out.println(unos+" veces 1, "+ceros+" veces 0"); :}
+ ;
 
 L ::= 
    L COMA PALABRA:palabra   {: write(palabra+","); :}
  | PALABRA:palabra          {: primerPalabra = palabra; :}
+;
+
+N ::= 
+   N Np
+ | Np
+;
+
+Np ::= 
+   CERO   {: ceros += 1; :}
+ | UNO     {: unos += 1; :}
 ;

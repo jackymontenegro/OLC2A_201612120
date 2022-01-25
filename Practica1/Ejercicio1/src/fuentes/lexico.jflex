@@ -18,8 +18,6 @@ import java_cup.runtime.Symbol;
 %full
 
 
-
-
 PALABRA = [A-Za-z]+
 SPACE   = [\ \r\t\f\t]
 ENTER   = [\ \n]
@@ -27,6 +25,8 @@ ENTER   = [\ \n]
 %%
 
 "," {return new Symbol(sym.COMA,yyline,yychar, yytext());} 
+"0" {return new Symbol(sym.CERO,yyline,yychar, yytext());} 
+"1" {return new Symbol(sym.UNO,yyline,yychar, yytext());} 
 
 <YYINITIAL> {PALABRA}       {return new Symbol(sym.PALABRA, yyline, yycolumn, yytext());}  
 
