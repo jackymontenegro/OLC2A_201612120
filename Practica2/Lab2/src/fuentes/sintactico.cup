@@ -1,0 +1,55 @@
+
+package fuentes;
+
+import java_cup.runtime.Symbol;
+
+//PARSER PARA EL ARCHIVO DE ESCENARIOS
+parser code
+{://Codigo visible
+    
+    public void syntax_error(Symbol s){
+        System.err.println("ERROR R: ");
+        System.err.println(s);
+    }
+
+    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception{ 
+        System.err.println("ERROR N_R: ");
+        System.err.println(s);
+    }
+
+    
+
+:}
+
+action code
+{://Codigo de acciones
+    
+    public void write(String out) {
+        System.out.print(out);
+    }
+:}
+
+terminal String PUNTO,CERO, UNO;
+nonterminal Nodo S,L,B,N;
+
+
+start with S;
+
+S::=
+    N          {: :}
+ ;
+
+N ::= 
+   N:N PUNTO L:L    {: write(N.val + "."+L.val);  :}
+ | L:L              {: RESULT = L; :}
+;
+
+L ::= 
+   L:L B:B   {: L.val = L.val * 2 + B.val; RESULT = L;  :}
+ | B:B        {: RESULT = B; :}
+;
+
+B ::= 
+   CERO   {: Nodo nodo = new Nodo(); nodo.val = 0; RESULT = nodo;  :}
+ | UNO     {: Nodo nodo = new Nodo(); nodo.val = 1; RESULT = nodo; :}
+;
